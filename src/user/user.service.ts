@@ -27,4 +27,15 @@ export class UserService {
       HttpStatus.NOT_FOUND,
     );
   }
+
+  async getById(id: number) {
+    const user = await this.usersRepository.findOne({ id });
+    if (user) {
+      return user;
+    }
+    throw new HttpException(
+      'User with id does not exits',
+      HttpStatus.NOT_FOUND,
+    );
+  }
 }
