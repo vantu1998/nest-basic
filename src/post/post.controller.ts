@@ -1,3 +1,4 @@
+import { FineOneParams } from './../utils/findOneParams';
 import { UpdatePostDto } from './dto/updatePost.dto';
 import { PostService } from './post.service';
 import {
@@ -6,8 +7,8 @@ import {
   Delete,
   Get,
   Param,
+  Patch,
   Post,
-  Put,
 } from '@nestjs/common';
 import CreatePostDto from './dto/createPost.dto';
 
@@ -21,7 +22,7 @@ export class PostController {
   }
 
   @Get(':id')
-  getPostById(@Param('id') id: string) {
+  getPostById(@Param() id: FineOneParams) {
     return this.postService.getById(Number(id));
   }
 
@@ -30,7 +31,7 @@ export class PostController {
     return this.postService.create(post);
   }
 
-  @Put(':id')
+  @Patch(':id')
   updatePost(@Param('id') id: string, @Body() post: UpdatePostDto) {
     return this.postService.update(Number(id), post);
   }
